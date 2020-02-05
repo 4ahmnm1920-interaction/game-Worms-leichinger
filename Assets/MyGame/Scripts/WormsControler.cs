@@ -15,7 +15,7 @@ public class WormsControler : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.W))
         {
             Vector3 jump = new Vector3(0, jumphigth, 0);
             rb.AddForce(jump);
@@ -24,6 +24,7 @@ public class WormsControler : MonoBehaviour
 
         if(Input.GetKey(KeyCode.D))
         {
+            rb.drag = 0;
             Vector3 forwoard = new Vector3(0, 0, walkspeed);
             rb.AddForce(forwoard);
 
@@ -31,9 +32,20 @@ public class WormsControler : MonoBehaviour
 
          if(Input.GetKey(KeyCode.A))
         {
+            rb.drag = 0;
             Vector3 backwards = new Vector3(0, 0, -walkspeed);
             rb.AddForce(backwards);
 
+        }
+
+        if(Input.GetKeyUp(KeyCode.D))
+        {
+            rb.drag = 20;
+        }
+
+         if(Input.GetKeyUp(KeyCode.A))
+        {
+            rb.drag = 20;
         }
     
     }
