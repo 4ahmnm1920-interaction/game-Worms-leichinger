@@ -55,7 +55,7 @@ public class WormsControler : MonoBehaviour
             Rigidbody clone;
             clone = Instantiate(projectile, transform.position, transform.rotation);
 
-            clone.velocity = transform.TransformDirection(Vector3.forward * 10);
+            clone.velocity = transform.TransformDirection(Vector3.forward * 15);
         }
     
     }
