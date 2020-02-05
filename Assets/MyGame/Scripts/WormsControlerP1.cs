@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WormsControlerP1 : MonoBehaviour
+public class WormsControler : MonoBehaviour
 {
     public Rigidbody rb;
     public float jumphigth;
     public float walkspeed;
 
     public Rigidbody projectile;
-    public float Ammospeed;
-    public Transform spawnpoint;
 
     void Start()
     {
@@ -21,7 +19,6 @@ public class WormsControlerP1 : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W))
         {
-            rb.drag = 0;
             Vector3 jump = new Vector3(0, jumphigth, 0);
             rb.AddForce(jump);
 
@@ -56,11 +53,9 @@ public class WormsControlerP1 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Rigidbody clone;
-            clone = Instantiate(projectile, spawnpoint.position, transform.rotation);
+            clone = Instantiate(projectile, transform.position, transform.rotation);
 
-            Vector3 pSpeed  = new Vector3(0, 0, Ammospeed);
-
-            clone.AddForce(pSpeed);
+            clone.velocity = transform.TransformDirection(Vector3.forward * 15);
         }
     
     }
