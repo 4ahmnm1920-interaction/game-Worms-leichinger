@@ -37,6 +37,7 @@ public class WormsControlerP1 : MonoBehaviour
 
          if(Input.GetKey(KeyCode.A))
         {
+            //transform
             rb.drag = 0;
             Vector3 backwards = new Vector3(0, 0, -walkspeed);
             rb.AddForce(backwards);
