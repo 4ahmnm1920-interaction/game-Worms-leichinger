@@ -10,7 +10,12 @@ public class WormsControlerP2 : MonoBehaviour
 
     public Rigidbody projectile;
     public float Ammospeed;
-    public Transform Spawnpoit;    
+    public Transform Spawnpoit;  
+
+    public KeyCode JumpKey;
+    public KeyCode LeftKey;
+    public KeyCode RightKey;
+    public KeyCode ShootKey;
 
     void Start()
     {
@@ -19,7 +24,7 @@ public class WormsControlerP2 : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if(Input.GetKeyDown(JumpKey))
         {
             rb.drag = 0;
             Vector3 jump = new Vector3(0, jumphigth, 0);
@@ -27,7 +32,7 @@ public class WormsControlerP2 : MonoBehaviour
 
         }
 
-        if(Input.GetKey(KeyCode.RightArrow))
+        if(Input.GetKey(RightKey))
         {
             rb.drag = 0;
             Vector3 forwoard = new Vector3(0, 0, walkspeed);
@@ -39,7 +44,7 @@ public class WormsControlerP2 : MonoBehaviour
             }
         }
 
-         if(Input.GetKey(KeyCode.LeftArrow))
+         if(Input.GetKey(LeftKey))
         {
             rb.drag = 0;
             Vector3 backwards = new Vector3(0, 0, -walkspeed);
@@ -51,17 +56,17 @@ public class WormsControlerP2 : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyUp(KeyCode.RightArrow))
+        if(Input.GetKeyUp(RightKey))
         {
             rb.drag = 20;
         }
 
-         if(Input.GetKeyUp(KeyCode.LeftArrow))
+         if(Input.GetKeyUp(LeftKey))
         {
             rb.drag = 20;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightAlt))
+        if (Input.GetKeyDown(ShootKey))
         {
             Rigidbody clone;
             clone = Instantiate(projectile, Spawnpoit.position, transform.rotation);
@@ -69,7 +74,15 @@ public class WormsControlerP2 : MonoBehaviour
 
             clone.AddForce(pSpeed);
         }
-
+    
+        /// <summary>
+        /// OnTriggerEnter is called when the Collider other enters the trigger.
+        /// </summary>
+        /// <param name="other">The other Collider involved in this collision.</param>
+        void OnTriggerEnter(Collider other)
+        {
+            
+        }
 
     }
 }

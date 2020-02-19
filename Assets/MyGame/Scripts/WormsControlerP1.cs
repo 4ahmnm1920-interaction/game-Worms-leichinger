@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WormsControler : MonoBehaviour
+public class WormsControlerP1 : MonoBehaviour
 {
     public Rigidbody rb;
     public float jumphigth;
@@ -12,6 +12,11 @@ public class WormsControler : MonoBehaviour
     public float Ammospeed;
     public Transform Spawnpoit;
 
+    public KeyCode JumpKey;
+    public KeyCode LeftKey;
+    public KeyCode RightKey;
+    public KeyCode ShootKey;
+
     void Start()
     {
 
@@ -19,7 +24,7 @@ public class WormsControler : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKeyDown(JumpKey))
         {
             rb.drag = 0;
             Vector3 jump = new Vector3(0, jumphigth, 0);
@@ -27,7 +32,7 @@ public class WormsControler : MonoBehaviour
 
         }
 
-        if(Input.GetKey(KeyCode.D))
+        if(Input.GetKey(RightKey))
         {
             rb.drag = 0;
             Vector3 forwoard = new Vector3(0, 0, walkspeed);
@@ -40,7 +45,7 @@ public class WormsControler : MonoBehaviour
 
         }
 
-         if(Input.GetKey(KeyCode.A))
+         if(Input.GetKey(LeftKey))
         {
             rb.drag = 0;
             Vector3 backwards = new Vector3(0, 0, -walkspeed);
@@ -53,17 +58,17 @@ public class WormsControler : MonoBehaviour
 
         }
 
-        if(Input.GetKeyUp(KeyCode.D))
+        if(Input.GetKeyUp(RightKey))
         {
             rb.drag = 20;
         }
 
-         if(Input.GetKeyUp(KeyCode.A))
+         if(Input.GetKeyUp(LeftKey))
         {
             rb.drag = 20;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(ShootKey))
         {
             Rigidbody clone;
             clone = Instantiate(projectile, Spawnpoit.position, transform.rotation);
