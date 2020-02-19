@@ -10,8 +10,7 @@ public class WormsControlerP2 : MonoBehaviour
 
     public Rigidbody projectile;
     public float Ammospeed;
-    public Transform Spawnpoit;
-    
+    public Transform Spawnpoit;    
 
     void Start()
     {
@@ -33,7 +32,11 @@ public class WormsControlerP2 : MonoBehaviour
             rb.drag = 0;
             Vector3 forwoard = new Vector3(0, 0, walkspeed);
             rb.AddForce(forwoard);
-
+            transform.eulerAngles = new Vector3(0,0,0);
+             if(Ammospeed<1)
+            {
+                Ammospeed = (Ammospeed*(-1));
+            }
         }
 
          if(Input.GetKey(KeyCode.LeftArrow))
@@ -41,7 +44,11 @@ public class WormsControlerP2 : MonoBehaviour
             rb.drag = 0;
             Vector3 backwards = new Vector3(0, 0, -walkspeed);
             rb.AddForce(backwards);
-
+            transform.eulerAngles = new Vector3(0,180,0);
+            if(Ammospeed>1)
+            {
+                Ammospeed = (Ammospeed*(-1));
+            }
         }
 
         if(Input.GetKeyUp(KeyCode.RightArrow))
@@ -58,10 +65,11 @@ public class WormsControlerP2 : MonoBehaviour
         {
             Rigidbody clone;
             clone = Instantiate(projectile, Spawnpoit.position, transform.rotation);
-            Vector3 pSpeed  = new Vector3(0, 0, -Ammospeed);
+            Vector3 pSpeed  = new Vector3(0, 0, Ammospeed);
 
             clone.AddForce(pSpeed);
         }
-    
+
+
     }
 }
