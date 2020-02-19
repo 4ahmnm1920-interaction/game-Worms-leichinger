@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WormsControlerP2 : MonoBehaviour
+public class WormsControlerP1 : MonoBehaviour
 {
     public Rigidbody rb;
     public float jumphigth;
@@ -10,12 +10,16 @@ public class WormsControlerP2 : MonoBehaviour
 
     public Rigidbody projectile;
     public float Ammospeed;
-    public Transform Spawnpoit;  
+    public Transform Spawnpoit;
 
     public KeyCode JumpKey;
     public KeyCode LeftKey;
     public KeyCode RightKey;
     public KeyCode ShootKey;
+
+    public float dynFriction;
+     public float statFriction;
+     public CapsuleCollider coll;
 
     void Start()
     {
@@ -34,7 +38,10 @@ public class WormsControlerP2 : MonoBehaviour
 
         if(Input.GetKey(RightKey))
         {
-            rb.drag = 0;
+            coll = GetComponent<CapsuleCollider>();
+            coll.material.dynamicFriction = 0;
+            coll.material.staticFriction = 0;
+
             Vector3 forwoard = new Vector3(0, 0, walkspeed);
             rb.AddForce(forwoard);
             transform.eulerAngles = new Vector3(0,0,0);
@@ -42,11 +49,15 @@ public class WormsControlerP2 : MonoBehaviour
             {
                 Ammospeed = (Ammospeed*(-1));
             }
+
         }
 
          if(Input.GetKey(LeftKey))
         {
-            rb.drag = 0;
+            coll = GetComponent<CapsuleCollider>();
+            coll.material.dynamicFriction = 0;
+            coll.material.staticFriction = 0;
+
             Vector3 backwards = new Vector3(0, 0, -walkspeed);
             rb.AddForce(backwards);
             transform.eulerAngles = new Vector3(0,180,0);
@@ -54,17 +65,24 @@ public class WormsControlerP2 : MonoBehaviour
             {
                 Ammospeed = (Ammospeed*(-1));
             }
+
         }
 
         if(Input.GetKeyUp(RightKey))
         {
-            rb.drag = 20;
+            coll = GetComponent<CapsuleCollider>();
+            coll.material.dynamicFriction = dynFriction;
+            coll.material.staticFriction = statFriction;
         }
 
-         if(Input.GetKeyUp(LeftKey))
+        if(Input.GetKeyUp(LeftKey))
         {
-            rb.drag = 20;
+            coll = GetComponent<CapsuleCollider>();
+            coll.material.dynamicFriction = dynFriction;
+            coll.material.staticFriction = statFriction;
         }
+
+        
 
         if (Input.GetKeyDown(ShootKey))
         {
@@ -75,14 +93,5 @@ public class WormsControlerP2 : MonoBehaviour
             clone.AddForce(pSpeed);
         }
     
-        /// <summary>
-        /// OnTriggerEnter is called when the Collider other enters the trigger.
-        /// </summary>
-        /// <param name="other">The other Collider involved in this collision.</param>
-        void OnTriggerEnter(Collider other)
-        {
-            
-        }
-
     }
 }
