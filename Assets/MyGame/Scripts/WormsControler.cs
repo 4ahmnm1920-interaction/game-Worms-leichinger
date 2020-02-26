@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WormsControlerP1 : MonoBehaviour
+public class WormsControler : MonoBehaviour
 {
     public Rigidbody rb;
     public float jumphigth;
@@ -19,11 +19,11 @@ public class WormsControlerP1 : MonoBehaviour
 
     public float dynFriction;
      public float statFriction;
-     public CapsuleCollider coll;
+     public CapsuleCollider collider;
 
     void Start()
     {
-
+    
     }
 
     void Update()
@@ -38,9 +38,9 @@ public class WormsControlerP1 : MonoBehaviour
 
         if(Input.GetKey(RightKey))
         {
-            coll = GetComponent<CapsuleCollider>();
-            coll.material.dynamicFriction = 0;
-            coll.material.staticFriction = 0;
+            collider = GetComponent<CapsuleCollider>();
+            collider.material.dynamicFriction = 0;
+            collider.material.staticFriction = 0;
 
             Vector3 forwoard = new Vector3(0, 0, walkspeed);
             rb.AddForce(forwoard);
@@ -54,9 +54,9 @@ public class WormsControlerP1 : MonoBehaviour
 
          if(Input.GetKey(LeftKey))
         {
-            coll = GetComponent<CapsuleCollider>();
-            coll.material.dynamicFriction = 0;
-            coll.material.staticFriction = 0;
+            collider = GetComponent<CapsuleCollider>();
+            collider.material.dynamicFriction = 0;
+            collider.material.staticFriction = 0;
 
             Vector3 backwards = new Vector3(0, 0, -walkspeed);
             rb.AddForce(backwards);
@@ -70,16 +70,16 @@ public class WormsControlerP1 : MonoBehaviour
 
         if(Input.GetKeyUp(RightKey))
         {
-            coll = GetComponent<CapsuleCollider>();
-            coll.material.dynamicFriction = dynFriction;
-            coll.material.staticFriction = statFriction;
+            collider = GetComponent<CapsuleCollider>();
+            collider.material.dynamicFriction = dynFriction;
+            collider.material.staticFriction = statFriction;
         }
 
         if(Input.GetKeyUp(LeftKey))
         {
-            coll = GetComponent<CapsuleCollider>();
-            coll.material.dynamicFriction = dynFriction;
-            coll.material.staticFriction = statFriction;
+            collider = GetComponent<CapsuleCollider>();
+            collider.material.dynamicFriction = dynFriction;
+            collider.material.staticFriction = statFriction;
         }
 
         
@@ -92,6 +92,15 @@ public class WormsControlerP1 : MonoBehaviour
 
             clone.AddForce(pSpeed);
         }
-    
+
     }
+
+    void OnTriggerEnter(Collider other) 
+        {
+            if (other.gameObject.CompareTag("PickUp"))
+            {
+                other.gameObject.SetActive (false);
+                Debug.Log("PickUp");
+            }
+        }
 }
