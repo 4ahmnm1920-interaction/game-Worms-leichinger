@@ -94,13 +94,4 @@ public class WormsControler : MonoBehaviour
         }
 
     }
-
-    void OnTriggerEnter(Collider other) 
-        {
-            if (other.gameObject.CompareTag("PickUp"))
-            {
-                other.gameObject.SetActive (false);
-                Debug.Log("PickUp");
-            }
-        }
 }
